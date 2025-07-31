@@ -1,4 +1,3 @@
-# Объединённые зависимости для PM_work v1
 fastapi==0.110.2
 uvicorn[standard]==0.27.1
 SQLAlchemy>=2.0
