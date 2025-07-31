@@ -1,25 +1,27 @@
 import logging
-from whisper import load_model
+from faster_whisper import WhisperModel
 
 
 logger = logging.getLogger("whisper_service")
 
 
+
 class WhisperTranscriber:
     def __init__(self, language='ru', model_size='small'):
-        logger.info(f"Загрузка модели Whisper '{model_size}'...")
-        self.model = load_model(model_size)
+        logger.info(f"Загрузка модели FasterWhisper '{model_size}'...")
+        self.model = WhisperModel(model_size, device="cpu")
         self.language = language
-        logger.info("Whisper модель загружена")
+        logger.info("FasterWhisper модель загружена")
 
-    def transcribe(self, audio_bytes):
+    def transcribe(self, audio_path):
         """
-        Транскрибирует аудиофайл (WAV) в текст.
-        Передаёт байты WAV напрямую в модель Whisper.
+        Транскрибирует аудиофайл (WAV) в текст через FasterWhisper.
+        Принимает путь к файлу.
         """
         try:
-            result = self.model.transcribe(audio_bytes, language=self.language)
-            return result['text']
+            segments, info = self.model.transcribe(audio_path, language=self.language)
+            text = " ".join([segment.text for segment in segments])
+            return text
         except Exception as e:
-            logger.error(f"Ошибка транскрипции через Whisper: {e}")
+            logger.error(f"Ошибка транскрипции через FasterWhisper: {e}")
             raise
