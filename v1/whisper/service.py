@@ -14,7 +14,7 @@ class WhisperTranscriber:
     """
     def __init__(self, model_path: Optional[str] = None) -> None:
         if model_path is None:
-            model_path = os.getenv("VOSK_MODEL_PATH", "data/vosk-model-ru-0.42")
+            model_path = os.getenv("VOSK_MODEL_PATH")
         self.model = Model(model_path)
 
     def transcribe(self, audio_path: str) -> str:
