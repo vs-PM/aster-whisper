@@ -7,9 +7,9 @@
 
 import json
 import logging
-import urlparse
-import swaggerpy.client
 
+import swaggerpy.client
+import urlparse
 from ari.model import *
 
 log = logging.getLogger(__name__)

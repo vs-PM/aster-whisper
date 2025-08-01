@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from .whisper.routes import router as whisper_router
-from .docx.routes import router as docx_router
 
+from .docx.routes import router as docx_router
+from .whisper.routes import router as whisper_router
 
 app = FastAPI(
     title="PM_work v1",

@@ -1,7 +1,9 @@
 
-from pydantic_settings import BaseSettings
-from dotenv import load_dotenv; load_dotenv()
 import os
+
+from pydantic_settings import BaseSettings
+
+from dotenv import load_dotenv; load_dotenv()
 
 class DocxSettings(BaseSettings):
     DOCX_SHARED_DIR: str = os.getenv("DOCX_SHARED_DIR", "path_to_shared_dir")

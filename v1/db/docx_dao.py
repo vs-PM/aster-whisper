@@ -1,6 +1,7 @@
 from . import async_session_maker
 from .docx_models import MfgBot
 
+
 class MfgBotDAO:
     @staticmethod
     async def get_by_id(id_: int):

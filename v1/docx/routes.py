@@ -1,11 +1,12 @@
 
-from fastapi import APIRouter, HTTPException
 import os
 import tempfile
-from .utils import extract_tags_from_docx, generate_filled_docx
-from .schemas import DocxGenerateRequest, DocxGenerateResponse
-from ..db.docx_dao import MfgBotDAO
 
+from fastapi import APIRouter, HTTPException
+
+from ..db.docx_dao import MfgBotDAO
+from .schemas import DocxGenerateRequest, DocxGenerateResponse
+from .utils import extract_tags_from_docx, generate_filled_docx
 
 router = APIRouter(
     prefix="/docx",

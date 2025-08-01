@@ -1,10 +1,12 @@
-from fastapi import APIRouter, File, UploadFile, HTTPException
 import logging
-import tempfile
 import os
-from .service import WhisperTranscriber
+import tempfile
+
+from fastapi import APIRouter, File, HTTPException, UploadFile
+
 from v1.db.whisper_dao import WhisperTranscriptDAO
 
+from .service import WhisperTranscriber
 
 router = APIRouter(
     prefix="/whisper",

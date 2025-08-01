@@ -1,27 +1,23 @@
-
-
-import logging
-
-import wave
 import json
-from vosk import Model, KaldiRecognizer
-
-
-logger = logging.getLogger("whisper_service")
-
-
-
-
-
 import os
+import wave
+from typing import Optional
+
+from dotenv import load_dotenv
+from vosk import KaldiRecognizer, Model
+
+load_dotenv()
 
 class WhisperTranscriber:
-    def __init__(self, model_path=None):
+    """
+    Класс для транскрипции аудио через Vosk.
+    """
+    def __init__(self, model_path: Optional[str] = None) -> None:
         if model_path is None:
-            model_path = os.getenv("VOSK_MODEL_PATH", "model/vosk-model-ru-0.22")
+            model_path = os.getenv("VOSK_MODEL_PATH", "data/vosk-model-ru-0.42")
         self.model = Model(model_path)
 
-    def transcribe(self, audio_path):
+    def transcribe(self, audio_path: str) -> str:
         """
         Транскрибирует WAV-файл в текст через Vosk.
         """
@@ -46,7 +42,4 @@ class WhisperTranscriber:
             raise
         finally:
             if wf is not None:
-                try:
-                    wf.close()
-                except Exception as close_e:
-                    pass
+                wf.close()

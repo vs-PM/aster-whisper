@@ -21,9 +21,10 @@ The first-class objects also have 'on_event' methods, which can subscribe to
 Stasis events relating to that object.
 """
 
-import re
-import requests
 import logging
+import re
+
+import requests
 
 log = logging.getLogger(__name__)
 

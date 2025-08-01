@@ -1,5 +1,7 @@
-from sqlalchemy import Column, Integer, String, Text, TIMESTAMP
+from sqlalchemy import TIMESTAMP, Column, Integer, String, Text
+
 from . import Base
+
 
 class MfgBot(Base):
     __tablename__ = "mfg_bot"

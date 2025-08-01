@@ -1,6 +1,7 @@
 from . import async_session_maker
 from .whisper_models import VoskText
 
+
 class WhisperTranscriptDAO:
     @staticmethod
     async def create(file_name: str, channel_id: str, text: str, created_at=None):

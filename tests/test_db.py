@@ -1,9 +1,11 @@
-import pytest
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.exc import OperationalError
 import asyncio
 
+import pytest
+from sqlalchemy.exc import OperationalError
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+
 from v1.db import DATABASE_URL
+
 
 @pytest.mark.asyncio
 async def test_db_connection():

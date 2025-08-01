@@ -1,5 +1,7 @@
 import os
+
 from v1.whisper.service import WhisperTranscriber
+
 
 def test_vosk_transcribe():
     audio_path = os.path.join("tests", "whisper", "output.wav")
