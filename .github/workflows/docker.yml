@@ -24,16 +24,20 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Extract git tag
+        id: get_tag
+        run: |
+          echo "TAG=$(git describe --tags --always --dirty)" >> $GITHUB_ENV
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: dockerfile_PM
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/aster-ssh:latest
-          build-args: |
-            SSH_USER=${{ secrets.SSH_USER }}
-            SSH_PASSWORD=${{ secrets.SSH_PASSWORD }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/aster-whisper:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/aster-whisper:${{ env.TAG }}
 
       - name: Logout from DockerHub
         run: docker logout

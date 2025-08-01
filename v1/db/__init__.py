@@ -10,13 +10,14 @@ load_dotenv()
 Base = declarative_base()
 
 
-POSTGRES_USER = os.getenv("POSTGRES_USER")
-POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
-POSTGRES_DB = os.getenv("POSTGRES_DB", "postgres")
-POSTGRES_HOST = os.getenv("POSTGRES_HOST")
-POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 
-DATABASE_URL = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+VOSK_POSTGRES_USER = os.getenv("VOSK_POSTGRES_USER")
+VOSK_POSTGRES_PASSWORD = os.getenv("VOSK_POSTGRES_PASSWORD")
+VOSK_POSTGRES_DB = os.getenv("VOSK_POSTGRES_DB", "postgres")
+VOSK_POSTGRES_HOST = os.getenv("VOSK_POSTGRES_HOST")
+VOSK_POSTGRES_PORT = os.getenv("VOSK_POSTGRES_PORT", "5432")
+
+DATABASE_URL = f"postgresql+asyncpg://{VOSK_POSTGRES_USER}:{VOSK_POSTGRES_PASSWORD}@{VOSK_POSTGRES_HOST}:{VOSK_POSTGRES_PORT}/{VOSK_POSTGRES_DB}"
 
 engine = create_async_engine(DATABASE_URL, echo=False)
 async_session_maker = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
