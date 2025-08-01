@@ -1,3 +1,5 @@
+# Vosk model
+model/
 # Python
 __pycache__/
 *.py[cod]

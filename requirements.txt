@@ -16,4 +16,4 @@ requests>=2.31.0
 pydub>=0.25.1
 numpy==2.2.0
 python-multipart
-faster-whisper
+vosk
