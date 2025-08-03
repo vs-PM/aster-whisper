@@ -17,3 +17,5 @@ pydub>=0.25.1
 numpy==2.2.0
 python-multipart
 vosk
+aioari
+websockets

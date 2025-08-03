@@ -1,6 +1,4 @@
 from sqlalchemy import TIMESTAMP, Column, Integer, String, Text
-
-# Модель для существующей таблицы vosk_text (без создания через Base)
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()

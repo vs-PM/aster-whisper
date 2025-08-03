@@ -1,23 +1,25 @@
-# Пакет для работы с БД (инициализация подключения)
-import os
-
-from dotenv import load_dotenv
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.engine import make_url
 
-load_dotenv()
+from v1.config.db_config import db_settings
 
 Base = declarative_base()
 
+# Явное преобразование строки в URL для SQLAlchemy
+database_url = make_url(db_settings.DATABASE_URL)
 
+engine = create_async_engine(
+    database_url,
+    echo=False,
+    pool_size=20,
+    max_overflow=10,
+    pool_timeout=30,
+    pool_recycle=3600
+)
 
-VOSK_POSTGRES_USER = os.getenv("VOSK_POSTGRES_USER")
-VOSK_POSTGRES_PASSWORD = os.getenv("VOSK_POSTGRES_PASSWORD")
-VOSK_POSTGRES_DB = os.getenv("VOSK_POSTGRES_DB", "postgres")
-VOSK_POSTGRES_HOST = os.getenv("VOSK_POSTGRES_HOST")
-VOSK_POSTGRES_PORT = os.getenv("VOSK_POSTGRES_PORT", "5432")
-
-DATABASE_URL = f"postgresql+asyncpg://{VOSK_POSTGRES_USER}:{VOSK_POSTGRES_PASSWORD}@{VOSK_POSTGRES_HOST}:{VOSK_POSTGRES_PORT}/{VOSK_POSTGRES_DB}"
-
-engine = create_async_engine(DATABASE_URL, echo=False)
-async_session_maker = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
+async_session_maker = sessionmaker(
+    engine,
+    expire_on_commit=False,
+    class_=AsyncSession
+)
